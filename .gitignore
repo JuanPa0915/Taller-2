@@ -1,0 +1,12 @@
+# Entorno virtual (muy pesado)
+venv/
+
+# Base de datos local
+db.sqlite3
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Configuraciones de VS Code
+.vscode/
