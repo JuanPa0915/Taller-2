@@ -1,14 +1,55 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear/Editar Tarea</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+        .card {
+            border: 1px solid #dee2e6;
+        }
+        .form-check-label {
+            margin-left: 0.35rem;
+        }
+        .descripcion-field {
+            min-height: 130px;
+        }
+    </style>
+</head>
+<body>
 <div class="container mt-5">
-    <div class="card shadow mx-auto" style="max-width: 500px;">
+    <div class="card shadow mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <h2>Detalles de la Tarea</h2>
+            <h2 class="mb-3">Detalles de la Tarea</h2>
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-success">Guardar</button>
+
+                <div class="mb-3">
+                    <label for="id_titulo" class="form-label">Título</label>
+                    {{ form.titulo }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_descripcion" class="form-label">Descripción</label>
+                    {{ form.descripcion }}
+                </div>
+
+                <div class="form-check mb-3">
+                    {{ form.completada }}
+                    <label class="form-check-label" for="id_completada">Completada</label>
+                </div>
+
+                <button type="submit" class="btn btn-success me-2">Guardar</button>
                 <a href="{% url 'lista_tareas' %}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
 </div>
+</body>
+</html>
