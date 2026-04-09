@@ -2,15 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <title>CRUD Tareas</title>
 </head>
-<body class="bg-light">
+<body>
     <div class="container mt-5">
-        <h1 class="mb-4">📋 Lista de Tareas</h1>
-        <a href="{% url 'crear_tarea' %}" class="btn btn-primary mb-3">+ Nueva Tarea</a>
+        <h1 class="mb-4"><i class="bi bi-card-checklist me-2"></i>Lista de Tareas</h1>
+        <a href="{% url 'crear_tarea' %}" class="btn btn-primary mb-3"><i class="bi bi-plus-lg me-1"></i>Nueva Tarea</a>
         
         <div class="card shadow">
             <table class="table m-0">
@@ -25,15 +27,21 @@
                     {% for t in tareas %}
                     <tr>
                         <td>{{ t.titulo }}</td>
-                        <td>{{ t.completada|yesno:"Completada,Pendiente" }}</td>
                         <td>
-                            <a href="{% url 'editar_tarea' t.id %}" class="btn btn-sm btn-warning">Editar</a>
-                            <a href="{% url 'eliminar_tarea' t.id %}" class="btn btn-sm btn-danger">Borrar</a>
+                            {% if t.completada %}
+                                <span class="badge-completada"><i class="bi bi-check-circle me-1"></i>Completada</span>
+                            {% else %}
+                                <span class="badge-pendiente"><i class="bi bi-clock me-1"></i>Pendiente</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'editar_tarea' t.id %}" class="btn btn-sm btn-warning me-1" title="Editar"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{% url 'eliminar_tarea' t.id %}" class="btn btn-sm btn-danger" title="Borrar"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="3" class="text-center">No hay tareas. ¡Crea la primera!</td>
+                        <td colspan="3" class="text-center py-4 text-muted"><i class="bi bi-inbox fs-2 d-block mb-2"></i>No hay tareas. ¡Crea la primera!</td>
                     </tr>
                     {% endfor %}
                 </tbody>
