@@ -21,6 +21,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Tarea</th>
+                        <th>Descripción</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -29,6 +30,9 @@
                     {% for t in tareas %}
                     <tr>
                         <td>{{ t.titulo }}</td>
+
+                        <td>{{ t.descripcion|default:"Sin descripción"|truncatechars:50 }}</td>
+
                         <td>
                             {% if t.completada %}
                                 <span class="badge-completada"><i class="bi bi-check-circle me-1"></i>Completada</span>
@@ -36,6 +40,7 @@
                                 <span class="badge-pendiente"><i class="bi bi-clock me-1"></i>Pendiente</span>
                             {% endif %}
                         </td>
+
                         <td>
                             <a href="{% url 'editar_tarea' t.id %}" class="btn btn-sm btn-warning me-1" title="Editar"><i class="bi bi-pencil-square"></i></a>
                             <a href="{% url 'eliminar_tarea' t.id %}" class="btn btn-sm btn-danger" title="Borrar"><i class="bi bi-trash"></i></a>
@@ -43,7 +48,7 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="3" class="text-center py-4 text-muted"><i class="bi bi-inbox fs-2 d-block mb-2"></i>No hay tareas. ¡Crea la primera!</td>
+                        <td colspan="4" class="text-center py-4 text-muted"><i class="bi bi-inbox fs-2 d-block mb-2"></i>No hay tareas. ¡Crea la primera!</td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('tareas.urls')), # Esto conecta tu CRUD a la página principal
+    path('', include('tareas.urls')), # conectar tu CRUD a la página principal
 ]
